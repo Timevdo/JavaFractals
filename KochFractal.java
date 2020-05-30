@@ -6,13 +6,17 @@ public class KochFractal extends JPanel{
     
     int fractal_depth;
 
+    /**
+     * Making a new instance of a KochFractal will create a new window containing the fractal
+     * @param f_depth the depth of the koch snowflake
+     */
     public KochFractal(int f_depth){
         fractal_depth = f_depth;
 
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(512, 512));
 
-        JFrame frame = new JFrame("Koch Snowflake");
+        JFrame frame = new JFrame("Koch Snowflake, depth " + fractal_depth);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(512,512);
 
@@ -119,6 +123,7 @@ public class KochFractal extends JPanel{
         return new Point((int)x, (int)y);
     }
 
+    //distance formula
     private double dist(Point a, Point b){
         return Math.sqrt(Math.pow(b.getY() - a.getY(), 2) + Math.pow(b.getX() - a.getX(), 2));
     }
