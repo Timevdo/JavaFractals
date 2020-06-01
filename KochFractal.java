@@ -124,10 +124,6 @@ public class KochFractal extends JPanel{
     }
 
     //distance formula
-    private double dist(Point a, Point b){
-        return Math.sqrt(Math.pow(b.getY() - a.getY(), 2) + Math.pow(b.getX() - a.getX(), 2));
-    }
-
     private double dist(double x1, double y1, double x2, double y2){
         return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
     }
