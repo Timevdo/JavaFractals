@@ -1,9 +1,12 @@
 import java.awt.*;
 import javax.swing.*;
-
 import java.util.ArrayList;
-public class KochFractal extends JPanel{
-    
+
+/**
+ * Generates a GUI window with a koch snowflake
+ * Warning: Doesn't quite work for depth > 5
+ */
+public class KochFractal extends JPanel {
     int fractal_depth;
 
     /**

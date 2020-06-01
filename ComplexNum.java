@@ -13,9 +13,16 @@ public class ComplexNum {
         b = other.b;
     }
 
+    public double getReal() {return a;}
+    public double getImag() {return b;}
+
     public void add(ComplexNum other){
         a += other.a;
         b += other.b;
+    }
+
+    public void add(int n){
+        a += n;
     }
 
     public void multiply(ComplexNum other){
@@ -23,9 +30,15 @@ public class ComplexNum {
         b = a*other.b + b*other.a;
     }
 
+    public void multiply(int n){
+        a *= n;
+        b *= n;
+    }
+
     public void square(){
-        a = a*a - b*b;
+        double atemp = a*a - b*b;
         b = 2*a*b;
+        a = atemp;
     }
 
     public double modulus(){
