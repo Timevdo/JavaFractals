@@ -6,8 +6,8 @@ public class JuliaFractal extends JPanel {
     private double cx, cy;
 
     private int precision = 100;
-    private int size = 500, offset = size/2;
-    double scale = 125.0;
+    private int size = 1500, offset = size/2;
+    double scale = 500.0;
 
     public JuliaFractal(double ctermx, double ctermy){
         cx = ctermx;
@@ -58,7 +58,7 @@ public class JuliaFractal extends JPanel {
     }
 
     public static void main(String[] args) {
-        JuliaFractal j = new JuliaFractal(-0.4, 0);
+        JuliaFractal j = new JuliaFractal(-0.4, 0.6);
     }
 
 }
