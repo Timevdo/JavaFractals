@@ -26,8 +26,9 @@ public class ComplexNum {
     }
 
     public void multiply(ComplexNum other){
-        a = a*other.a - b*other.b;
+        double atemp = a*other.a - b*other.b;
         b = a*other.b + b*other.a;
+        a = atemp;
     }
 
     public void multiply(int n){

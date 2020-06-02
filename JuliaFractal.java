@@ -15,7 +15,7 @@ public class JuliaFractal extends JPanel {
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(size, size));
 
-        JFrame frame = new JFrame("Julia Fractal");
+        JFrame frame = new JFrame("Julia Fractal, C = " + c.toString());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(size,size);
 
@@ -55,7 +55,7 @@ public class JuliaFractal extends JPanel {
     }
 
     public static void main(String[] args) {
-        JuliaFractal j = new JuliaFractal(new ComplexNum(-0.4, 0.6));
+        JuliaFractal j = new JuliaFractal(new ComplexNum(-0.8, -0.15));
     }
 
 }
