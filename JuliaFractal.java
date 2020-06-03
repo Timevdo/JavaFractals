@@ -16,7 +16,7 @@ public class JuliaFractal extends JPanel {
         setPreferredSize(new Dimension(size, size));
 
         JFrame frame = new JFrame("Julia Fractal, C = " + c.toString());
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(size,size);
 
         frame.getContentPane().add(this);
