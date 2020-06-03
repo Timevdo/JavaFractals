@@ -1,4 +1,5 @@
 Prototype Version, 2020-06-03
+Final Project, AP Computer Science 2020. "Program that Generates Fractals in Java"
 
 For the most complete product, run the main() method of GUI.java
 The GUI currently supports generating Julia Sets with any complex parameter C
