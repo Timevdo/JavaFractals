@@ -54,11 +54,11 @@ public class GUI{
                 double b = Double.parseDouble(imagField.getText());
 
                 ComplexNum c = new ComplexNum(a, b);
-                new JuliaFractal(c);
+                new JuliaFractal(c, true);
             }
         });
 
-        String suggestedValues = "\nSuggested Values:\n-0.6+0i\n-0.4+0.6i\n0.258+0.01i\n-0.7269 + 0.1889i";
+        String suggestedValues = "\nSuggested Values:\n-0.4+0.6i\n0.285+0.01i\n-0.7269 + 0.1889i";
 
         panel.add(new JLabel("A julia fractal takes a complex parameter, C"));
         panel.add(new JLabel("Real Component of C"));
