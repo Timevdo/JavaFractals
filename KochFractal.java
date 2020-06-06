@@ -6,6 +6,7 @@ import java.util.ArrayList;
  * Generates a GUI window with a koch snowflake
  * Warning: Doesn't quite work for depth > 5
  */
+@Deprecated
 public class KochFractal extends JPanel {
     int fractal_depth;
 

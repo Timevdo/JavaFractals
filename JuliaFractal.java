@@ -83,11 +83,11 @@ public class JuliaFractal extends JPanel {
         }
 
         double h = c * (255.0/100.0);
-        return new Color((int)h/2, Math.abs(128 - (int)h), 255);
+        return new Color((int)h, Math.abs(128 - (int)h), 255);
     }
 
     public static void main(String[] args) {
-        JuliaFractal j = new JuliaFractal(new ComplexNum(-0.8, -0.15));
+        JuliaFractal j = new JuliaFractal(new ComplexNum(-0.8, -0.15), true);
     }
 
 }

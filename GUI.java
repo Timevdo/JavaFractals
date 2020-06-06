@@ -8,6 +8,8 @@ public class GUI{
     private JFrame frame = new JFrame();
     JPanel panel = new JPanel();
 
+    private boolean color = true;
+
     public GUI(){
 
         //kochGUI();
@@ -17,7 +19,7 @@ public class GUI{
 
         frame.add(panel);
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setTitle("GUI");
+        frame.setTitle("Julia Set Generator");
         frame.pack();
         frame.setVisible(true);
     }
@@ -47,6 +49,17 @@ public class GUI{
         JTextField realField = new JTextField("-0.4", 8);
         JTextField imagField = new JTextField("0.6", 8);
 
+        JCheckBox colorBox = new JCheckBox("Enable Color", true);
+        colorBox.addItemListener(new ItemListener() {
+            public void itemStateChanged(ItemEvent e) {         
+               if(e.getStateChange() == e.SELECTED){
+                   color = true;
+               } else {
+                   color = false;
+               }
+            }           
+         });
+
         JButton juliaButton = new JButton(new AbstractAction("Create Julia Fractal"){
             @Override
             public void actionPerformed(ActionEvent arg0){
@@ -54,7 +67,7 @@ public class GUI{
                 double b = Double.parseDouble(imagField.getText());
 
                 ComplexNum c = new ComplexNum(a, b);
-                new JuliaFractal(c, true);
+                new JuliaFractal(c, color);
             }
         });
 
@@ -66,6 +79,7 @@ public class GUI{
         panel.add(new JLabel("Imaginary Component of C"));
         panel.add(imagField);
         panel.add(juliaButton);
+        panel.add(colorBox);
         panel.add(new JTextArea(suggestedValues));
     }
 
