@@ -1,13 +1,17 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.awt.color.ColorSpace;
+
 
 public class JuliaFractal extends JPanel {
     
     private ComplexNum c;
 
     private int precision = 100;
-    private int size = 1000, offset = size/2;
+    private int size = 1000;
+    private int xCenter = 500, yCenter = 500;
+    private int xOffset = 0, yOffset = 0;
     double scale = 300.0;
 
     private boolean color;
@@ -23,19 +27,67 @@ public class JuliaFractal extends JPanel {
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(size,size);
 
+        addMouseListener(new MouseListener(){
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //System.out.println("click, x=" + e.getX() + " y=" + e.getY());
+                moveFractal(e.getX(), e.getY());
+            }
+
+            //Ignore this, does nothing, just makes code compile.
+            @Override
+            public void mouseExited(MouseEvent e){}
+            @Override
+            public void mouseReleased(MouseEvent e){}
+            @Override
+            public void mousePressed(MouseEvent e){}
+            @Override
+            public void mouseEntered(MouseEvent e){}
+            
+        });
+
+        addMouseWheelListener(new MouseWheelListener() {
+            @Override
+            public void mouseWheelMoved(MouseWheelEvent e){
+                zoom(e.getPreciseWheelRotation() * -200);
+            }
+
+        });
+
         frame.getContentPane().add(this);
         frame.pack();
         frame.setVisible(true);
-
     }
     
     @Override
     public void paintComponent(Graphics g){
+        drawFractal(g);
+    }
+
+    private void moveFractal(int newX, int newY){
+        xCenter = newX;
+        yCenter = newY;
+
+        drawFractal(this.getGraphics());
+    }
+
+    private void zoom(double amt){
+        scale += amt;
+        drawFractal(this.getGraphics());
+    }
+
+    /**
+     * Draws a julia fractal given the parameters stored as instance variables
+     * @param g java graphics object with which to draw the fractal
+     */
+    private void drawFractal(Graphics g){
+        removeAll();
+
         int z;
 
         for (int x = 0; x < size; x++){
             for (int y = 0; y < size; y++){
-                z = inFractal(new ComplexNum((x - offset)/scale, (y - offset)/scale));
+                z = inFractal(new ComplexNum((x - xCenter)/scale, (y - yCenter)/scale));
                 if (color){
                     g.setColor(genColor(z));
                     g.drawLine(x, y, x, y);
@@ -47,6 +99,10 @@ public class JuliaFractal extends JPanel {
                 }
             }
         }
+
+        //debug point at center of fractal
+        ///g.setColor(Color.RED);
+        //g.fillOval(500, 500, 10, 10);
     }
 
     /**
@@ -58,7 +114,7 @@ public class JuliaFractal extends JPanel {
         int iteration = 0;
         int max_iterations = 100;
 
-        while (z.modulus() < 3 && iteration < max_iterations){
+        while (z.modulus() < 5 && iteration < max_iterations){
             z.square();
             z.add(c);
 
