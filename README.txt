@@ -1,9 +1,9 @@
-Prototype Version, 2020-06-03
+Prototype Version, 2020-06-07
 Final Project, AP Computer Science 2020. "Program that Generates Fractals in Java"
 
 For the most complete product, run the main() method of GUI.java
-The GUI currently supports generating Julia Sets with any complex parameter C
+The GUI currently supports generating Julia Sets with any complex parameter C, either in Color or in Black & White.
+Use the mousewheel to zoom, and drag to move the fractal around
 
-Koch Fractals are not currently implemented into the GUI, to see the best working Koch Fractal, run the main() method of KochFractal.java
+Koch Snowflakes and other fractals were originally meant to be a part of the program, but have since been removed. Code that generates Koch Snowflakes has been marked as deprecated
 
-It is not yet decided whether the final product will feature Koch Fractals, as they are pretty boring compared to Julia Sets

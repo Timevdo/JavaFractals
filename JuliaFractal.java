@@ -1,59 +1,78 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.awt.color.ColorSpace;
-
 
 public class JuliaFractal extends JPanel {
     
     private ComplexNum c;
 
-    private int precision = 100;
     private int size = 1000;
     private int xCenter = 500, yCenter = 500;
-    private int xOffset = 0, yOffset = 0;
     double scale = 300.0;
 
     private boolean color;
 
     public JuliaFractal(ComplexNum c_term, boolean do_color){
+        //set instance variables
         c = c_term;
         color = do_color;
 
+        //set panel parameters
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(size, size));
 
+        //create JFrame and set parameters
         JFrame frame = new JFrame("Julia Fractal, C = " + c.toString());
         frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(size,size);
 
-        addMouseListener(new MouseListener(){
+        //Method of Java Panel class that adds and event listener that is triggered when mouse is moved
+        addMouseMotionListener(new MouseMotionListener(){
+            //records the position of the mouse every time it is moved, and compares postion when dragged to previous position to determine direction
+            int prevX, prevY;
+
             @Override
-            public void mouseClicked(MouseEvent e) {
-                //System.out.println("click, x=" + e.getX() + " y=" + e.getY());
-                moveFractal(e.getX(), e.getY());
+            public void mouseMoved(MouseEvent e){
+                prevX = e.getX();
+                prevY = e.getY();
             }
 
-            //Ignore this, does nothing, just makes code compile.
             @Override
-            public void mouseExited(MouseEvent e){}
-            @Override
-            public void mouseReleased(MouseEvent e){}
-            @Override
-            public void mousePressed(MouseEvent e){}
-            @Override
-            public void mouseEntered(MouseEvent e){}
-            
+            public void mouseDragged(MouseEvent e){
+                //System.out.println("Dragged!");
+                if (e.getX() > prevX && e.getY() > prevY){
+                    //moved right and down
+                    xCenter += (e.getX() - prevX)/2;
+                    yCenter += (e.getY() - prevY)/2;
+                } else if (e.getX() > prevX && e.getY() < prevY){
+                    //moved right and up
+                    xCenter += (e.getX() - prevX)/2;
+                    yCenter -= (prevY - e.getY())/2;
+                } else if (e.getX() < prevX && e.getY() > prevY) {
+                    //moved left and down
+                    xCenter -= (prevX - e.getX())/2;
+                    yCenter += (e.getY() - prevY)/2;
+                } else {
+                    //moved left and up
+                    xCenter -= (prevX - e.getX())/2;
+                    yCenter -= (prevY - e.getY())/2;
+                }
+                drawFractal(getGraphics());
+            }
         });
 
+        //adds a mousewheel listener
         addMouseWheelListener(new MouseWheelListener() {
+            //call the zoom() method when mousewheel is moved
             @Override
             public void mouseWheelMoved(MouseWheelEvent e){
+                //zoom in by the amount the mouse wheel was moved, * a constant
                 zoom(e.getPreciseWheelRotation() * -200);
             }
 
         });
 
+        //JFrame stuff
         frame.getContentPane().add(this);
         frame.pack();
         frame.setVisible(true);
@@ -64,13 +83,7 @@ public class JuliaFractal extends JPanel {
         drawFractal(g);
     }
 
-    private void moveFractal(int newX, int newY){
-        xCenter = newX;
-        yCenter = newY;
-
-        drawFractal(this.getGraphics());
-    }
-
+    //change the scale by an amount, and redraw
     private void zoom(double amt){
         scale += amt;
         drawFractal(this.getGraphics());
@@ -84,10 +97,12 @@ public class JuliaFractal extends JPanel {
         removeAll();
 
         int z;
-
+        //loop thru all pixels
         for (int x = 0; x < size; x++){
             for (int y = 0; y < size; y++){
+                //determine complex number that coresponds to each pixel
                 z = inFractal(new ComplexNum((x - xCenter)/scale, (y - yCenter)/scale));
+                //determine what color to make each pixel
                 if (color){
                     g.setColor(genColor(z));
                     g.drawLine(x, y, x, y);
@@ -99,10 +114,6 @@ public class JuliaFractal extends JPanel {
                 }
             }
         }
-
-        //debug point at center of fractal
-        ///g.setColor(Color.RED);
-        //g.fillOval(500, 500, 10, 10);
     }
 
     /**
@@ -139,9 +150,11 @@ public class JuliaFractal extends JPanel {
         }
 
         double h = c * (255.0/100.0);
+        //determines a color that coresponds to an integer. Values determined experimentally.
         return new Color((int)h, Math.abs(128 - (int)h), 255);
     }
 
+    //main() method for ease of debugging. Please use GUI.main()
     public static void main(String[] args) {
         JuliaFractal j = new JuliaFractal(new ComplexNum(-0.8, -0.15), true);
     }
