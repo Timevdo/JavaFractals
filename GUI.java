@@ -81,7 +81,7 @@ public class GUI{
         });
         
         //values of C that make cool-looking Julia Sets
-        String suggestedValues = "\nSuggested Values:\n-0.4+0.6i\n0.285+0.01i\n-0.7269 + 0.1889i";
+        String suggestedValues = "\nSuggested Values:\n-0.4+0.6i\n0.285+0.01i\n0.285+0i\n-0.7269+0.1889i\n-0.8-0.15";
 
         //Add all this stuff to the panel.
         panel.add(new JLabel("A julia fractal takes a complex parameter, C"));

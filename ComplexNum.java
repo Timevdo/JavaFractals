@@ -3,25 +3,43 @@ public class ComplexNum {
     private double a;
     private double b;
 
+    /**
+     * Creates a new complex number in the form a + bi
+     * @param a_value real component
+     * @param b_value imaginary component
+     */
     public ComplexNum(double a_value, double b_value){
         a = a_value;
         b = b_value;
     }
 
+    /**
+     * Copy constructor
+     * @param other
+     */
     public ComplexNum(ComplexNum other){
         a = other.a;
         b = other.b;
     }
 
+    //getter methods
     public double getReal() {return a;}
     public double getImag() {return b;}
 
+    /**
+     * Adds a complex number to this complex number
+     * @param other
+     */
     public void add(ComplexNum other){
         a += other.a;
         b += other.b;
     }
 
-    public void add(int n){
+    /**
+     * Adds a real 
+     * @param n
+     */
+    public void add(double n){
         a += n;
     }
 

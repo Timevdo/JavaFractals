@@ -102,9 +102,12 @@ public class JuliaFractal extends JPanel {
      * @param g java graphics object with which to draw the fractal
      */
     private void drawFractal(Graphics g){
-        removeAll();
-
         int z;
+
+        if (!color){
+            super.paintComponent(g);
+        }
+
         //loop thru all pixels
         for (int x = 0; x < size; x++){
             for (int y = 0; y < size; y++){
@@ -132,8 +135,11 @@ public class JuliaFractal extends JPanel {
     private int inFractal(ComplexNum z){
         int iteration = 0;
         int max_iterations = 100;
+        //there is a theorem that states that if |Z| becomes greater than some number R, where R^2 - R > |C|, Z will tend towards +/- infinity
+        double r = c.modulus()*c.modulus() - c.modulus() + 5;
+        
 
-        while (z.modulus() < 5 && iteration < max_iterations){
+        while (z.modulus() < r && iteration < max_iterations){
             z.square();
             z.add(c);
 
