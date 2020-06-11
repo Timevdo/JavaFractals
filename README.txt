@@ -1,4 +1,4 @@
-Prototype Version, 2020-06-10
+Version 2020-06-10
 Final Project, AP Computer Science 2020. "Program that Generates Fractals in Java"
 
 For the most complete product, run the main() method of GUI.java
